@@ -177,7 +177,9 @@ Utilizado para as operações de **Zoom Out** (redução ou *downscaling*), este
 
 O sistema foi desenvolvido sobre uma arquitetura **SoC (System on Chip)**, onde o processamento é dividido entre o HPS (processamento de controle, arquivos e interface) e a FPGA (aceleração de cálculo de coordenadas e geração de vídeo). Conforme o diagrama abaixo:
 
-<img src="IMAGENS/fluxo.png" width="400">
+<p align="center">
+  <img src="IMAGENS/fluxo.png" width="600">
+</p>
 
 ## 3.1 Organização do Sistema em Camadas
 
@@ -278,7 +280,9 @@ O primeiro desafio foi interpretar os dados brutos do mouse USB.
 *   **Solução:** Implementação de um integrador de software com *Clipping* (ceifamento). O código acumula os deltas e força as coordenadas a permanecerem dentro do intervalo $[0, 159]$ e $[0, 119]$.
 *   **Validação:** Ao mover o mouse físico, os valores de $X$ e $Y$ impressos no terminal correspondiam exatamente aos limites da tela VGA, sem *overflow* ou comportamento errático.
 
-<img src="IMAGENS/mouse_teste.jpg" width="400">
+<p align="center">
+ <img src="IMAGENS/mouse_teste.jpg" width="400">
+</p>
 
 ### 4.1.2 Parser de Arquivo BMP
 *   **Procedimento:** Carregamento de imagens `.bmp` de teste via `carregar_BMP.c`.
@@ -286,7 +290,9 @@ O primeiro desafio foi interpretar os dados brutos do mouse USB.
 *   **Causa:** O padrão BMP armazena os pixels da linha inferior para a superior (*Bottom-Up*), enquanto o driver VGA varre de cima para baixo.
 *   **Solução:** Implementação da função `inverter_vertical()`, que realiza o espelhamento das linhas no buffer de memória antes do envio para a FPGA.
 
-<img src="IMAGENS/imagem_invertida.jpg" width="400">
+<p align="center">
+ <img src="IMAGENS/imagem_invertida.jpg" width="400">
+</p>
 
 ## 4.2 Teste do Modo Janela (Hardware-in-the-Loop)
 
@@ -297,7 +303,9 @@ Este foi o teste mais crítico, pois envolve um ciclo de feedback onde o HPS ped
 *   **Análise:** O processador ARM (800 MHz) executava as instruções de leitura do PIO mais rápido do que a FPGA (25 MHz) conseguia processar e atualizar o barramento de retorno.
 *   **Solução:** Implementação de um protocolo de *Handshake* robusto com delays inseridos (`delay_simples` em `receber_fpga.c`). O HPS agora levanta um sinal (`PIO_NEXT`), aguarda um tempo seguro para estabilização elétrica e lógica, e só então lê o dado retornado.
 
-<img src="IMAGENS/corrompida.jpeg" width="400">
+<p align="center">
+ <img src="IMAGENS/corrompida.jpeg" width="400">
+</p>
 
 ## 4.3 Teste de Transição de Estados
 
@@ -309,7 +317,9 @@ Este foi o teste mais crítico, pois envolve um ciclo de feedback onde o HPS ped
 
 Os testes confirmaram que a aplicação em C consegue gerenciar com sucesso a latência da comunicação com a FPGA. O sistema final permite desenhar janelas com o mouse e aplicar zoom em tempo real, comprovando o funcionamento da arquitetura híbrida onde a FPGA calcula as coordenadas (aceleração) e o HPS monta a interface final.
 
-<img src="IMAGENS/resultado.jpeg" width="400">
+<p align="center">
+ <img src="IMAGENS/resultado.jpeg" width="400">
+</p>
 
 ---
 
