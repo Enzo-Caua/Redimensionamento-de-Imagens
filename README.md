@@ -195,7 +195,8 @@ A implementação segue uma abordagem em camadas, isolando a lógica de alto ní
     *   **`enviar_fpga.c`:** Implementa o protocolo de comunicação "bit-banging" para enviar pixels serialmente para a memória da FPGA.
 
 4.  **Camada de Hardware (Verilog - FPGA):**
-    *   **`controlador_JER.v`:** Núcleo IP proprietário. Contém a RAM de Vídeo, o gerador de sincronismo VGA, a máquina de estados para média de blocos e a lógica aritmética para cálculo reverso de coordenadas.
+    *   **`ghdr_top.v`:** O módulo ghrd_top integra todos os periféricos da placa (como ADC, áudio, clocks, DRAM, VGA, GPIO, UART, QSPI, teclado PS/2, LEDs, switches e interfaces de comunicação) e realiza a conexão estruturada entre a FPGA e o HPS (processador ARM embutido), usando o sistema gerado pelo Qsys/Platform Designer (soc_system). Ele declara sinais internos, mapeia os pinos físicos da placa para as interfaces lógicas do HPS e dos blocos FPGA, organiza reset, eventos e comunicação entre subsistemas, e cria toda a infraestrutura necessária para que o HPS controle dispositivos externos e troque dados com lógica customizada dentro da FPGA. É, essencialmente, o topo completo do projeto que integra hardware programável, processador e periféricos em um único sistema funcional.
+     *   **`controlador_JER.v`:** O módulo controlador_JER recebe a imagem original enviada pelo HPS, interpreta os comandos de zoom, algoritmo e modo de operação, processa os pixels aplicando cópia, interpolação ou médias conforme o algoritmo selecionado, e armazena o resultado em RAM interna. Ele controla toda a lógica de endereçamento, leitura, escrita e sincronização dos pixels, operando tanto no modo VGA — onde envia a imagem processada para exibição — quanto no modo janela, no qual devolve pixels ao HPS sob demanda. Em resumo, ele é o bloco central responsável por coordenar a ampliação, filtragem e disponibilização da imagem processada.
 
 ## 3.2 Estratégias de Implementação
 
