@@ -307,7 +307,7 @@ Este foi o teste mais crítico, pois envolve um ciclo de feedback onde o HPS ped
 
 Os testes confirmaram que a aplicação em C consegue gerenciar com sucesso a latência da comunicação com a FPGA. O sistema final permite desenhar janelas com o mouse e aplicar zoom em tempo real, comprovando o funcionamento da arquitetura híbrida onde a FPGA calcula as coordenadas (aceleração) e o HPS monta a interface final.
 
-<img src="IMAGENS/resultado.jpg" width="400">
+<img src="IMAGENS/resultado.jpeg" width="400">
 
 ---
 
