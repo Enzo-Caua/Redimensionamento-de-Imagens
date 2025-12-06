@@ -275,11 +275,15 @@ O primeiro desafio foi interpretar os dados brutos do mouse USB.
 *   **Solução:** Implementação de um integrador de software com *Clipping* (ceifamento). O código acumula os deltas e força as coordenadas a permanecerem dentro do intervalo $[0, 159]$ e $[0, 119]$.
 *   **Validação:** Ao mover o mouse físico, os valores de $X$ e $Y$ impressos no terminal correspondiam exatamente aos limites da tela VGA, sem *overflow* ou comportamento errático.
 
+![Teste do Mouse](IMAGENS/mouse_teste.jpg)
+
 ### 4.1.2 Parser de Arquivo BMP
 *   **Procedimento:** Carregamento de imagens `.bmp` de teste via `carregar_BMP.c`.
 *   **Erro Observado:** As imagens apareciam "de cabeça para baixo" no monitor VGA.
 *   **Causa:** O padrão BMP armazena os pixels da linha inferior para a superior (*Bottom-Up*), enquanto o driver VGA varre de cima para baixo.
 *   **Solução:** Implementação da função `inverter_vertical()`, que realiza o espelhamento das linhas no buffer de memória antes do envio para a FPGA.
+
+![Teste do BMP](IMAGENS/imagem_invertida.jpg)
 
 ## 4.2 Teste do Modo Janela (Hardware-in-the-Loop)
 
