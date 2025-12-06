@@ -175,7 +175,7 @@ Utilizado para as operações de **Zoom Out** (redução ou *downscaling*), este
 
 # 3. Arquitetura e Implementação
 
-O sistema foi desenvolvido sobre uma arquitetura **SoC (System on Chip)**, onde o processamento é dividido entre o HPS (processamento de controle, arquivos e interface) e a FPGA (aceleração de cálculo de coordenadas e geração de vídeo). Conforme o diagrama abaixo:
+O sistema foi desenvolvido sobre uma arquitetura **SoC (System on Chip)**, onde o processamento é dividido entre o HPS (processamento de controle, arquivos e interface) e a FPGA (aceleração de cálculo de coordenadas e geração de vídeo). Conforme ilustrado no diagrama abaixo, as cores representam cada parte do sistema: azul para os módulos em C no HPS, verde para os módulos em Assembly no HPS e rosa para os módulos em Verilog na FPGA.
 
 <p align="center">
   <img src="IMAGENS/fluxo.png" width="600">
